@@ -1,25 +1,25 @@
 # Changelog
 
-Tutte le modifiche rilevanti del progetto sono documentate in questo file.
+All notable changes to this project are documented in this file.
 
 ## [1.0.0] - 2026-02-14
 
 ### Added
-- Risorsa QBCore completa `qb_realweather` per sincronizzazione meteo e ora reale.
-- Aggiornamento meteo periodico da Open-Meteo senza API key.
-- Mapping meteo reale -> weather type GTA (`EXTRASUNNY`, `RAIN`, `THUNDER`, `FOGGY`, `SNOWLIGHT`, ecc.).
-- Comandi admin:
+- Complete QBCore resource `qb_realweather` for real-time weather and clock synchronization.
+- Periodic weather updates from Open-Meteo (no API key required for base usage).
+- Real-weather to GTA weather mapping (`EXTRASUNNY`, `RAIN`, `THUNDER`, `FOGGY`, `SNOWLIGHT`, etc.).
+- Admin commands:
   - `/realweatherrefresh`
   - `/realweatherstatus`
-- Sincronizzazione su join player e sync manuale client->server.
-- Modalita fallback/stale se API non disponibile.
-- Blackout notturno opzionale via config.
+- Client join synchronization and manual sync request flow.
+- Optional night blackout behavior via config.
+- Release package artifacts (`zip`, `sha256`, release manifest).
 
 ### Changed
-- Migliorata la robustezza della sincronizzazione orario con gestione `utc_offset_seconds`.
-- Migliorata persistenza meteo lato client evitando reapply inutili.
-- Aggiunto rate-limit richieste sync lato server per ridurre spam eventi.
+- Improved time synchronization robustness using `utc_offset_seconds`.
+- Improved client persistence behavior to avoid unnecessary weather re-application.
+- Added server-side sync request rate limiting.
 
 ### Fixed
-- Corretto endpoint Open-Meteo: rimosso `time` dal parametro `current` per compatibilita API attuale.
-- Migliorata validazione coordinate e normalizzazione ora/minuti.
+- Updated Open-Meteo endpoint query for current API compatibility (removed `time` from `current` parameter).
+- Added stronger coordinate validation and hour/minute normalization.

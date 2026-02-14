@@ -1,34 +1,42 @@
 # qb_realweather v1.0.0
 
-Release iniziale stabile per QBCore.
+Initial stable release for QBCore.
 
 ## Highlights
-- Meteo reale e ora reale sincronizzati con la posizione configurata.
-- Script standalone, leggero, senza dipendenze esterne oltre `qb-core`.
-- Comandi admin per refresh e diagnostica rapida.
-- Gestione fallback in caso di errore API.
 
-## Requisiti
-- FiveM Server
+- Real-world weather synchronization for FiveM.
+- Real local clock synchronization based on configured location.
+- Lightweight, standalone resource (requires only `qb-core`).
+- Admin refresh/status commands for operations and troubleshooting.
+- Fallback and stale-state handling for API outages.
+
+## Requirements
+
+- FiveM server
 - QBCore (`qb-core`)
-- Accesso internet lato server verso `api.open-meteo.com`
+- Server internet access to `api.open-meteo.com`
 
-## Installazione rapida
-1. Copia la cartella `qb_realweather` dentro `resources`.
-2. Aggiungi in `server.cfg`:
+## Quick Install
+
+1. Copy `qb_realweather` into your `resources` folder.
+2. Add to `server.cfg`:
    ```cfg
    ensure qb-core
    ensure qb_realweather
    ```
-3. Configura `Config.Latitude` e `Config.Longitude` in `config.lua`.
-4. Disattiva altri script meteo/orario per evitare conflitti.
+3. Configure `Config.Latitude` and `Config.Longitude` in `config.lua`.
+4. Disable any other weather/time resource to avoid conflicts.
 
-## Comandi
+## Admin Commands
+
 - `/realweatherrefresh`
 - `/realweatherstatus`
 
-## Supporto
-Per supporto tecnico, allega sempre:
-- output console di `realweatherstatus`
-- coordinate configurate
-- lista di eventuali altri weather script attivi
+## Support
+
+When requesting support, include:
+- output of `/realweatherstatus`
+- configured coordinates
+- list of active weather/time resources
+
+For more information: **@tronxxw**

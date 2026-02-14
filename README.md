@@ -1,53 +1,112 @@
 # qb_realweather
 
-Script QBCore che sincronizza meteo e orario di FiveM con meteo reale (API Open-Meteo).
+Professional QBCore weather resource for FiveM.
+It syncs GTA weather and in-game time with real-world weather data from Open-Meteo.
 
-Versione corrente: **v1.0.0**
+Current version: **v1.0.0**
 
-## Funzioni
+## Features
 
-- Meteo reale periodico (pioggia, nuvole, nebbia, temporale, neve)
-- Ora reale della localita configurata
-- Comandi admin QB:
-  - `/realweatherrefresh`
-  - `/realweatherstatus`
-- Fallback automatico se API non raggiungibile
-- Sync robusta su join player
+- Real-world weather sync (sun, clouds, fog, rain, thunder, snow)
+- Real local clock sync for your configured city
+- Automatic fallback mode if API is unavailable
+- Robust client sync on join/reconnect
+- Optional night blackout mode
+- Admin commands for refresh and diagnostics
 
-## Installazione
+## Requirements
 
-1. Copia `qb_realweather` nella tua cartella `resources`.
-2. In `server.cfg` aggiungi:
+- FiveM server
+- `qb-core`
+- Internet access from server to `api.open-meteo.com`
+
+## Installation
+
+1. Place `qb_realweather` inside your server `resources` folder.
+2. Add this to `server.cfg`:
 
 ```cfg
 ensure qb-core
 ensure qb_realweather
 ```
 
-3. Configura coordinate citta in `qb_realweather/config.lua`:
-   - `Config.Latitude`
-   - `Config.Longitude`
+3. Disable other weather/time resources (for example `qb-weathersync`) to avoid conflicts.
+4. Edit `config.lua` and set your city coordinates.
 
-## Importante
+## Configuration
 
-- Disattiva altri script che gestiscono meteo/orario (es. `qb-weathersync`) per evitare conflitti.
-- Se Open-Meteo non risponde, lo script usa i valori fallback del config.
+Edit `qb_realweather/config.lua`:
 
-## Config principali
+- `Config.Latitude`
+  - City latitude (example Rome: `41.9028`)
+- `Config.Longitude`
+  - City longitude (example Rome: `12.4964`)
+- `Config.UpdateIntervalMinutes`
+  - API refresh interval in minutes
+- `Config.SyncRealClock`
+  - `true` = use real local clock for configured city
+- `Config.Debug`
+  - `true` = print debug logs in server console
+- `Config.FallbackWeather`
+  - Fallback GTA weather type used if startup API call fails
+- `Config.FallbackHour`
+  - Fallback in-game hour
+- `Config.FallbackMinute`
+  - Fallback in-game minute
+- `Config.EnableNightBlackout`
+  - Enable optional blackout during configured night hours
+- `Config.NightBlackoutStartHour`
+  - Blackout start hour
+- `Config.NightBlackoutEndHour`
+  - Blackout end hour
 
-- `Config.UpdateIntervalMinutes`: frequenza aggiornamento API
-- `Config.SyncRealClock`: sincronizza ora reale
-- `Config.EnableNightBlackout`: blackout luci notturno opzionale
+## Admin Commands
 
-## Comandi admin
+- `/realweatherrefresh`
+  - Forces immediate weather update from API
+- `/realweatherstatus`
+  - Shows source, weather type, current synced time, temperature, and timezone
 
-- `/realweatherrefresh`: forza update API immediato
-- `/realweatherstatus`: mostra stato attuale sync
+## How It Works
+
+1. Server fetches current weather from Open-Meteo.
+2. Weather codes are mapped to GTA weather types.
+3. Server broadcasts synced payload to all clients.
+4. Clients apply weather, clock, and blackout state.
+5. If API is temporarily unavailable, script keeps last valid state (`stale`) or uses fallback at first boot.
+
+## Recommended Production Setup
+
+- Keep update interval between 5 and 15 minutes.
+- Keep `Config.Debug = false` on production servers.
+- Run only one weather/time authority resource.
+
+## Troubleshooting
+
+- Weather not changing:
+  - Check if another weather resource is still running.
+- Time not matching your city:
+  - Verify latitude/longitude values.
+- API issues:
+  - Check server internet access and firewall/DNS rules.
+- Quick diagnostics:
+  - Run `/realweatherstatus` and review server console logs.
+
+## Files
+
+- `fxmanifest.lua`
+- `config.lua`
+- `server/main.lua`
+- `client/main.lua`
+- `CHANGELOG.md`
+- `RELEASE_NOTES_v1.0.0.md`
 
 ## Changelog
 
-Vedi `qb_realweather/CHANGELOG.md`.
+See `CHANGELOG.md`.
 
-## Note
+## License
 
-Open-Meteo e gratuito e senza API key per uso base.
+Add your preferred license before public distribution.
+
+For more information: **@tronxxw**
