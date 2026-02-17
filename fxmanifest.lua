@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-author 'Codex'
+author 'adi'
 description 'QBCore real-time weather and clock sync from real world weather'
 version '1.0.0'
 
